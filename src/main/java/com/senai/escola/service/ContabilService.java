@@ -1,14 +1,7 @@
 package com.senai.escola.service;
 
 
-import com.senai.escola.config.escolaProperties;
-import com.senai.escola.dto.AlunoDTO;
-import com.senai.escola.entity.Aluno;
-import com.senai.escola.entity.Escola;
-import com.senai.escola.exception.BusinessException;
-import com.senai.escola.exception.ResourceNotFoundException;
-import com.senai.escola.repository.AlunoRepository;
-import com.senai.escola.repository.EscolaRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -16,9 +9,6 @@ import java.util.List;
 
 
 
-import com.erp.fiscal.dto.*;
-import com.erp.fiscal.entity.*;
-import com.erp.fiscal.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
