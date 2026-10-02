@@ -1,0 +1,14 @@
+body { margin:0; font-family: system-ui, sans-serif; background:#f4f6fa; display:flex; min-height:100vh; }
+.sidebar { width:240px; background:#1e293b; color:#cbd5e1; padding:1rem 0; }
+.sidebar .brand { font-size:1.3rem; font-weight:700; padding:0 1rem 1rem; color:#fff; border-bottom:1px solid #334155; }
+.sidebar ul { list-style:none; padding:0; margin:1rem 0; }
+.sidebar li a { display:block; padding:.7rem 1rem; color:#cbd5e1; cursor:pointer; border-left:3px solid transparent; }
+.sidebar li a:hover, .sidebar li a.active { background:#334155; color:#fff; border-left-color:#3b82f6; }
+.content { flex:1; padding:1.5rem; }
+.topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; gap:1rem; flex-wrap:wrap; }
+.card-kpi { background:#fff; border-radius:.75rem; padding:1.25rem; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+.card-kpi .label { font-size:.8rem; color:#64748b; text-transform:uppercase; }
+.card-kpi .value { font-size:1.6rem; font-weight:700; margin-top:.25rem; }
+.grid-kpi { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+table { background:#fff; border-radius:.5rem; overflow:hidden; }
+th { background:#f1f5f9; font-size:.85rem; }
