@@ -1,33 +1,21 @@
 package com.senai.escola.service;
 
 
-import com.senai.escola.config.escolaProperties;
-import com.senai.escola.dto.AlunoDTO;
-import com.senai.escola.entity.Aluno;
-import com.senai.escola.entity.Escola;
-import com.senai.escola.exception.BusinessException;
-import com.senai.escola.exception.ResourceNotFoundException;
-import com.senai.escola.repository.AlunoRepository;
-import com.senai.escola.repository.EscolaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
-
-
-import com.erp.fiscal.entity.*;
-import com.erp.fiscal.repository.*;
+import com.senai.escola.entity.NotaFiscal;
+import com.senai.escola.repository.NotaFiscalRepository;
+import com.senai.escola.tenant.TenantContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class FiscalService {
-
     private final NotaFiscalRepository nfRepo;
 
     public record Apuracao(
@@ -36,8 +24,9 @@ public class FiscalService {
         List<NotaFiscal> notas
     ) {}
 
-    public Apuracao apurar(Long empresaId, LocalDate ini, LocalDate fim) {
-        var notas = nfRepo.findByPeriodo(empresaId, ini, fim);
+    public Apuracao apurar(LocalDate ini, LocalDate fim) {
+        Long eid = TenantContext.get();
+        var notas = nfRepo.findByPeriodo(eid, ini, fim);
 
         BigDecimal debIcms = BigDecimal.ZERO, credIcms = BigDecimal.ZERO;
         BigDecimal basePC = BigDecimal.ZERO;

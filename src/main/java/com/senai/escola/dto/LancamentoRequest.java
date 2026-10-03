@@ -1,26 +1,23 @@
 package com.senai.escola.dto;
 
-import jakarta.validation.constraints.*;
-import java.time.LocalDate;
 
-
-package com.erp.fiscal.dto;
-
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 public record LancamentoRequest(
-    @NotNull Long empresaId,
     @NotNull LocalDate data,
-    @NotBlank String historico,
+    @NotNull String historico,
     String documento,
+    String tipo,
     @NotEmpty List<ItemDto> itens
 ) {
     public record ItemDto(
         @NotNull Long contaId,
-        @NotNull String tipo,      // "DEBITO" ou "CREDITO"
+        @NotNull String tipo,
         @NotNull @Positive BigDecimal valor
     ) {}
 }

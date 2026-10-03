@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -19,12 +20,13 @@ public class JwtTokenProvider {
         this.expiration = exp;
     }
 
-    public String gerar(String login, Long empresaId, String perfil) {
+    public String gerar(String login, Long empresaId, String perfil, Long usuarioId) {
         Date now = new Date();
         return Jwts.builder()
                 .subject(login)
                 .claim("empresaId", empresaId)
                 .claim("perfil", perfil)
+                .claim("usuarioId", usuarioId)
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + expiration))
                 .signWith(key)
@@ -43,4 +45,5 @@ public class JwtTokenProvider {
     public String getLogin(String token) { return parse(token).getSubject(); }
     public Long getEmpresaId(String token) { return parse(token).get("empresaId", Long.class); }
     public String getPerfil(String token) { return parse(token).get("perfil", String.class); }
+    public Long getUsuarioId(String token) { return parse(token).get("usuarioId", Long.class); }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>ERP Fiscal — Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+body{height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e293b 0%,#334155 100%);margin:0;font-family:system-ui,sans-serif;}
+.card-login{width:400px;border-radius:1rem;box-shadow:0 20px 60px rgba(0,0,0,.4);background:#fff;padding:2.5rem;}
+.logo{text-align:center;font-size:2rem;color:#1e293b;margin-bottom:.5rem;}
+.logo i{color:#3b82f6;}
+.sub{text-align:center;color:#64748b;margin-bottom:2rem;font-size:.9rem;}
+.btn-primary{background:#3b82f6;border:none;padding:.7rem;}
+.btn-primary:hover{background:#2563eb;}
+</style>
+</head>
+<body>
+<div class="card-login">
+  <div class="logo"><i class="bi bi-bank2"></i></div>
+  <h3 class="text-center">ERP Fiscal Contábil</h3>
+  <p class="sub">Sistema Profissional de Gestão Fiscal</p>
+  <form id="f">
+    <div class="mb-3">
+      <label class="form-label small">Usuário</label>
+      <input id="login" class="form-control" placeholder="admin" required autofocus>
+    </div>
+    <div class="mb-3">
+      <label class="form-label small">Senha</label>
+      <input id="senha" type="password" class="form-control" placeholder="••••••" required>
+    </div>
+    <button class="btn btn-primary w-100"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>
+    <div id="err" class="text-danger mt-3 small text-center"></div>
+  </form>
+</div>
+<script>
+if (localStorage.getItem('token')) location.href = '/index.html';
+document.getElementById('f').onsubmit = async e => {
+    e.preventDefault();
+    try {
+        const r = await fetch('/api/auth/login', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ login: login.value, senha: senha.value })
+        });
+        if (!r.ok) { err.textContent = 'Credenciais inválidas'; return; }
+        const data = await r.json();
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data));
+        location.href = '/index.html';
+    } catch (ex) { err.textContent = 'Erro de conexão'; }
+};
+</script>
+</body>
+</html>

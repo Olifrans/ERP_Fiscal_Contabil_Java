@@ -1,10 +1,5 @@
 package com.senai.escola.dto;
 
-import jakarta.validation.constraints.*;
-import java.time.LocalDate;
-
-
-package com.erp.fiscal.dto;
 
 import java.math.BigDecimal;
 import java.util.Map;

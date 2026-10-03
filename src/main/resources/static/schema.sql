@@ -1,9 +1,7 @@
--- schema.sql
-CREATE TABLE IF NOT EXISTS empresas (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    razao_social VARCHAR(200) NOT NULL,
-    cnpj VARCHAR(20) NOT NULL UNIQUE,
-    inscricao_estadual VARCHAR(20),
-    endereco VARCHAR(300),
-    regime_tributario VARCHAR(30)
-);
+-- Tabelas principais criadas via JPA ddl-auto=update
+-- Apenas índices e constraints adicionais:
+
+CREATE INDEX IF NOT EXISTS idx_lancamento_empresa_data ON lancamentos(empresa_id, data);
+CREATE INDEX IF NOT EXISTS idx_item_conta_lancamento ON itens_lancamento(conta_id, lancamento_id);
+CREATE INDEX IF NOT EXISTS idx_nf_empresa_data ON notas_fiscais(empresa_id, data_emissao);
+CREATE INDEX IF NOT EXISTS idx_audit_empresa_instante ON audit_log(empresa_id, instante);
