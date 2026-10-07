@@ -1,62 +1,371 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>ERP Fiscal Contábil</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link href="./style.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Fiscal Contábil - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    
+
+    
 </head>
 <body>
-<nav class="sidebar">
-  <div class="brand"><i class="bi bi-bank2"></i> ERP Fiscal</div>
-  <div class="user-info" id="userInfo"></div>
-  <ul class="nav flex-column">
-    <li><a data-tab="dashboard" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-    <li><a data-tab="empresas"><i class="bi bi-building"></i> Empresas</a></li>
-    <li><a data-tab="usuarios"><i class="bi bi-people"></i> Usuários</a></li>
-    <li><a data-tab="plano"><i class="bi bi-diagram-3"></i> Plano de Contas</a></li>
-    <li><a data-tab="lancamentos"><i class="bi bi-journal-text"></i> Lançamentos</a></li>
-    <li><a data-tab="nf"><i class="bi bi-receipt"></i> Notas Fiscais</a></li>
-    <li><a data-tab="fiscal"><i class="bi bi-calculator"></i> Apuração Fiscal</a></li>
-    <li><a data-tab="dre"><i class="bi bi-graph-up"></i> DRE</a></li>
-    <li><a data-tab="razao"><i class="bi bi-book"></i> Livro Razão</a></li>
-    <li><a data-tab="balancete"><i class="bi bi-table"></i> Balancete</a></li>
-    <li><a data-tab="fechamento"><i class="bi bi-calendar-check"></i> Fechamento Mensal</a></li>
-    <li><a data-tab="sped"><i class="bi bi-file-earmark-text"></i> SPED Fiscal</a></li>
-    <li><a data-tab="nfe"><i class="bi bi-file-earmark-code"></i> NF-e</a></li>
-    <li><a data-tab="auditoria"><i class="bi bi-shield-check"></i> Auditoria</a></li>
-    <li class="mt-auto"><a onclick="logout()"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
-  </ul>
-</nav>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="bi bi-building-gear"></i>
+                <span>ERP Fiscal</span>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="bi bi-person-circle"></i>
+            </div>
+            <div class="user-details">
+                <div class="user-name" id="userName">Carregando...</div>
+                <div class="user-role" id="userRole">-</div>
+            </div>
+        </div>
 
-<main class="content">
-  <header class="topbar">
-    <h4 id="pageTitle">Dashboard</h4>
-    <div class="filtros">
-      <input type="date" id="dtIni" class="form-control form-control-sm">
-      <input type="date" id="dtFim" class="form-control form-control-sm">
-      <button class="btn btn-sm btn-primary" onclick="refresh()"><i class="bi bi-arrow-clockwise"></i></button>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Principal</div>
+                <a href="#" class="nav-link active" data-tab="dashboard">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Cadastros</div>
+                <a href="#" class="nav-link" data-tab="empresas">
+                    <i class="bi bi-building"></i>
+                    <span>Empresas</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="usuarios">
+                    <i class="bi bi-people"></i>
+                    <span>Usuários</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="plano">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Plano de Contas</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Contábil</div>
+                <a href="#" class="nav-link" data-tab="lancamentos">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Lançamentos</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="razao">
+                    <i class="bi bi-book"></i>
+                    <span>Livro Razão</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="balancete">
+                    <i class="bi bi-table"></i>
+                    <span>Balancete</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="dre">
+                    <i class="bi bi-graph-up"></i>
+                    <span>DRE</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Fiscal</div>
+                <a href="#" class="nav-link" data-tab="nf">
+                    <i class="bi bi-receipt"></i>
+                    <span>Notas Fiscais</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="fiscal">
+                    <i class="bi bi-calculator"></i>
+                    <span>Apuração Fiscal</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="nfe">
+                    <i class="bi bi-file-earmark-code"></i>
+                    <span>NF-e</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="sped">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>SPED</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Sistema</div>
+                <a href="#" class="nav-link" data-tab="fechamento">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Fechamento</span>
+                </a>
+                <a href="#" class="nav-link" data-tab="auditoria">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Auditoria</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair do Sistema</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" id="breadcrumbCurrent">Dashboard</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="topbar-right">
+                <div class="date-filter">
+                    <label>Período:</label>
+                    <div class="date-inputs">
+                        <input type="date" id="dtIni" class="form-control form-control-sm">
+                        <span class="text-muted">até</span>
+                        <input type="date" id="dtFim" class="form-control form-control-sm">
+                        <button class="btn btn-primary btn-sm" onclick="refresh()" title="Atualizar">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="content-wrapper">
+            <!-- Dashboard -->
+            <section id="tab-dashboard" class="tab-content active">
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card stat-primary">
+                            <div class="stat-icon">
+                                <i class="bi bi-cash-stack"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">Receita Líquida</div>
+                                <div class="stat-value" id="statReceitaLiquida">R$ 0,00</div>
+                                <div class="stat-change text-success">
+                                    <i class="bi bi-arrow-up"></i> 12% vs mês anterior
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card stat-success">
+                            <div class="stat-icon">
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">Lucro Líquido</div>
+                                <div class="stat-value" id="statLucroLiquido">R$ 0,00</div>
+                                <div class="stat-change text-success">
+                                    <i class="bi bi-arrow-up"></i> 8% vs mês anterior
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card stat-warning">
+                            <div class="stat-icon">
+                                <i class="bi bi-receipt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">ICMS a Recolher</div>
+                                <div class="stat-value" id="statIcms">R$ 0,00</div>
+                                <div class="stat-change text-danger">
+                                    <i class="bi bi-exclamation-circle"></i> Vence em 5 dias
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card stat-info">
+                            <div class="stat-icon">
+                                <i class="bi bi-percent"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-label">Total Impostos</div>
+                                <div class="stat-value" id="statImpostos">R$ 0,00</div>
+                                <div class="stat-change text-muted">
+                                    <i class="bi bi-info-circle"></i> PIS + COFINS + IRPJ + CSLL
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-pie-chart"></i> Distribuição de Receitas
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartReceitas" height="120"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-bar-chart"></i> Impostos
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartImpostos" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Outras abas (placeholders para as demais seções) -->
+            <section id="tab-empresas" class="tab-content">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-building"></i> Gestão de Empresas</h5>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEmpresa">
+                            <i class="bi bi-plus-lg"></i> Nova Empresa
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="tabelaEmpresas">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>CNPJ</th>
+                                        <th>Razão Social</th>
+                                        <th>Inscrição Estadual</th>
+                                        <th>Município/UF</th>
+                                        <th>Regime Tributário</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyEmpresas">
+                                    <tr><td colspan="6" class="text-center text-muted">Carregando...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sections para outras abas serão renderizadas dinamicamente -->
+            <section id="tab-usuarios" class="tab-content"></section>
+            <section id="tab-plano" class="tab-content"></section>
+            <section id="tab-lancamentos" class="tab-content"></section>
+            <section id="tab-nf" class="tab-content"></section>
+            <section id="tab-fiscal" class="tab-content"></section>
+            <section id="tab-dre" class="tab-content"></section>
+            <section id="tab-razao" class="tab-content"></section>
+            <section id="tab-balancete" class="tab-content"></section>
+            <section id="tab-fechamento" class="tab-content"></section>
+            <section id="tab-sped" class="tab-content"></section>
+            <section id="tab-nfe" class="tab-content"></section>
+            <section id="tab-auditoria" class="tab-content"></section>
+        </div>
+    </main>
+
+    <!-- Modal Nova Empresa -->
+    <div class="modal fade" id="modalEmpresa" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-building"></i> Cadastrar Nova Empresa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEmpresa">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Razão Social *</label>
+                                <input type="text" class="form-control" id="eRazao" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">CNPJ *</label>
+                                <input type="text" class="form-control" id="eCnpj" placeholder="00.000.000/0000-00" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Inscrição Estadual</label>
+                                <input type="text" class="form-control" id="eIE">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Município</label>
+                                <input type="text" class="form-control" id="eMun">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">UF</label>
+                                <select class="form-select" id="eUF">
+                                    <option value="">Selecione...</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="MG">Minas Gerais</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Regime Tributário *</label>
+                                <select class="form-select" id="eRegime" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="SIMPLES">Simples Nacional</option>
+                                    <option value="LUCRO_PRESUMIDO">Lucro Presumido</option>
+                                    <option value="LUCRO_REAL">Lucro Real</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarEmpresa()">
+                        <i class="bi bi-save"></i> Salvar Empresa
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <section id="tab-dashboard" class="tab"></section>
-  <section id="tab-empresas" class="tab d-none"></section>
-  <section id="tab-usuarios" class="tab d-none"></section>
-  <section id="tab-plano" class="tab d-none"></section>
-  <section id="tab-lancamentos" class="tab d-none"></section>
-  <section id="tab-nf" class="tab d-none"></section>
-  <section id="tab-fiscal" class="tab d-none"></section>
-  <section id="tab-dre" class="tab d-none"></section>
-  <section id="tab-razao" class="tab d-none"></section>
-  <section id="tab-balancete" class="tab d-none"></section>
-  <section id="tab-fechamento" class="tab d-none"></section>
-  <section id="tab-sped" class="tab d-none"></section>
-  <section id="tab-nfe" class="tab d-none"></section>
-  <section id="tab-auditoria" class="tab d-none"></section>
-</main>
+    <!-- Toast Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastSuccess" class="toast align-items-center text-bg-success border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle-fill"></i> <span id="toastSuccessMsg">Operação realizada com sucesso!</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+        <div id="toastError" class="toast align-items-center text-bg-danger border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <span id="toastErrorMsg">Erro na operação</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
 
-<script src="./script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
