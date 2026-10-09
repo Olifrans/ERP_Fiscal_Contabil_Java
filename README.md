@@ -8,7 +8,7 @@
 [![Database](https://img.shields.io/badge/Database-MySQL%208.0-blue.svg)](https://www.mysql.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Sistema ERP (Enterprise Resource Planning) completo e profissional para gestão **Fiscal e Contábil** de empresas brasileiras. Desenvolvido com arquitetura moderna, multi-tenant, segurança robusta e aderência às normas contábeis (partidas dobradas) e fiscais (SPED, NF-e).
+Sistema ERP (Enterprise Resource Planning) para gestão **Fiscal e Contábil** de empresas brasileiras. Desenvolvido com arquitetura moderna, multi-tenant, segurança robusta e aderência às normas contábeis (partidas dobradas) e fiscais (SPED, NF-e).
 
 ---
 
