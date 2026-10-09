@@ -67,8 +67,8 @@ Antes de começar, certifique-se de ter instalado:
 
 ### 1. Clonar o Repositório
 ```bash
-git clone https://github.com/seu-usuario/erp-fiscal-contabil.git
-cd erp-fiscal-contabil
+git clone https://github.com/Olifrans/ERP_Fiscal_Contabil_Java.git
+cd RP_Fiscal_Contabil_Java
 ```
 
 ### 2. Configurar o Banco de Dados
